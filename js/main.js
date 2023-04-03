@@ -15,6 +15,8 @@ const gameend_music = document.querySelector('#gameend-music')
 const hurt_music = document.querySelector('#hurt-music')
 const life_music = document.querySelector('#life-music')
 const slide_music = document.querySelector('#slide-music')
+// Get The Screen Width
+const screen_width = screen.clientWidth
 
 // Declaring Score & Life Variables
 let score = 0
@@ -45,8 +47,13 @@ document.body.dispatchEvent(newEvent)
 let initialPos = 0
 let speedFactor = 40
 // minimum & maximum limit of movement
-const minWidth = 215
-const maxWidth = -215
+let minWidth = 215
+let maxWidth = -215
+// Change Movement Parameters For small screens
+if(screen_width == 360){
+  minWidth = 150
+  maxWidth = -150
+}
 
 function keyPressHandler(key){
   	switch (key) {
@@ -56,16 +63,16 @@ function keyPressHandler(key){
 		initialPos--
 		}
 		translateBoxPosition(box,`${initialPos * speedFactor}px`)
-			break;
+		break;
 		case 'arrowright':
 	    	// Only Increment When x is smaller than 215
 		if(initialPos*speedFactor < minWidth){
 		initialPos++
 		}
 		translateBoxPosition(box,`${initialPos * speedFactor}px`)
-			break;
+		break;
 		default:
-	    		break;
+		break;
 	}
 }
 
@@ -99,15 +106,32 @@ function randomColor(){
 
 // Generate Obstacles Function
 function createObstacles(){
-  const maxObs = Math.floor(Math.random() * (10 - 7 + 1)+7)
+  let maxObs_max_number = 10
+  let maxObs_min_number = 7
+  let maxR = 400
+  let maxW = 400
+  let maxRm = -120
+  let maxWm = 200
+
+// For Smaller Screen
+if(screen_width == 360){
+	maxR = 250
+	maxW = 250
+    	maxRm = -45
+    	maxWm = 125
+  	maxObs_max_number = 7
+  	maxObs_min_number = 5
+  }
+
+  const maxObs = Math.floor(Math.random() * (maxObs_max_number - maxObs_min_number + 1)+maxObs_min_number)
   const id_list = []
   let trackTag
   for (var i = 1; i <= maxObs; i++) {
   const id = "ob-" + crypto.randomUUID().replaceAll('-','')
   id_list.push(id)
   const maxMargin = Math.floor(Math.random() * (50 - 30 + 1)+30)
-  const maxRight = Math.floor(Math.random() * (400 - (-120) + 1)+(-120))
-  const maxWidth = Math.floor(Math.random() * (400 - 200 + 1)+200)
+  const maxRight = Math.floor(Math.random() * (maxR - (maxRm) + 1)+(maxRm))
+  const maxWidth = Math.floor(Math.random() * (maxW - maxWm + 1)+maxWm)
   const rightOrLeft = Math.random() >= 0.5 ? 'right' : 'left'
   let randCol = randomColor()
   // Prevent Spawning Same Colors in Parallel

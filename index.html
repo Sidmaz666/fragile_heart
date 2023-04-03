@@ -13,7 +13,7 @@
   <div 
     id="screen"
     class="h-screen bg-black/80 
-    w-[500px] overflow-hidden relative">
+    w-[360px] md:w-[500px] overflow-hidden relative">
 
     
       <div class="text-white text-semibold text-lg z-50">
@@ -50,16 +50,17 @@
     <div class="flex justify-center"
       id="box-container">
 
-	    <button class="w-[50%] bg-gray-300
-	      h-[100px] absolute bottom-0 left-0 
-	      z-50 opacity-0 outline-none "
+	    <span class="w-[50%] bg-gray-300
+	      h-[100px] absolute bottom-0 left-0 border-none 
+	      z-50 opacity-0 outline-none focus:outline-none ring-0 "
 	      onclick="triggerKBEvent('ArrowLeft')"
-	      ></button>
-	    <button class="w-[50%] bg-gray-300 
-	      h-[100px] absolute bottom-0 right-0
-	      z-50 opacity-0 outline-none"
+	      ></span>
+	    <span class="w-[50%] bg-gray-300 
+	      h-[100px] absolute bottom-0 right-0 border-none
+	      z-50 opacity-0 outline-none focus:outline-none ring-0 "
 	      onclick="triggerKBEvent('ArrowRight')"
-	      ></button>
+	      ></span>
+
     <div id="box"
 	 class="bg-purple-500 w-[50px]
 	 h-[50px] absolute bottom-5
